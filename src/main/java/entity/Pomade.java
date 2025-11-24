@@ -19,6 +19,12 @@ public class Pomade extends Medicament{
         System.out.println("Quantity: " + quantity);
         System.out.println("Spot: " + spot);
     }
+
+    @Override
+    public String getSpecificData() {
+        return String.format("Qte: %d g, Zone: %s", quantity, spot);
+    }
+
     public void setSpot(String spot) {
         this.spot = spot;
     }

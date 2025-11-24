@@ -18,6 +18,10 @@ public class Pill extends Medicament {
         System.out.println("Dosage: " + dosageMg + " mg");
         System.out.println("Pills number: " + nbrPills);
     }
+    @Override
+    public String getSpecificData() {
+        return String.format("Dose: %d mg, Qty: %d", dosageMg, nbrPills);
+    }
     public void setDosageMg(int dosageMg) {
         this.dosageMg = dosageMg;
     }
@@ -30,4 +34,5 @@ public class Pill extends Medicament {
     public int getNbrPills() {
         return nbrPills;
     }
+
 }

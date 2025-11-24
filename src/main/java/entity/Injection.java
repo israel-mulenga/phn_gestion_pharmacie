@@ -18,6 +18,10 @@ public  class Injection  extends Medicament{
         System.out.println("Volume Ml: " + volumeMl);
         System.out.println("Administration Road: " + administrationRoad);
     }
+    @Override
+    public String getSpecificData() {
+        return String.format("Vol: %d ml, Voie: %s", volumeMl, administrationRoad);
+    }
     public int getVolumeMl() {
         return this.volumeMl;
     }

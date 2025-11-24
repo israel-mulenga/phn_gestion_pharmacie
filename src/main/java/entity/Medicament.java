@@ -79,4 +79,6 @@ public abstract class Medicament {
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    public abstract String getSpecificData();
 }
