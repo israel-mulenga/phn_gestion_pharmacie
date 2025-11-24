@@ -1,31 +1,27 @@
+package entity;
+
 import java.time.LocalDate;
 
 public class Sirup extends Medicament {
     private int volumeMl;
-    private String gout;
+    private String taste; // Goût
 
-    public Sirup(String commercialName, String code, String productorLaboratory, int stock, double price, int volumeMl, LocalDate expirationDate, String gout) {
+    public Sirup(String commercialName, String code, String productorLaboratory, int stock, double price, LocalDate expirationDate, int volumeMl, String taste) {
         super(commercialName, code, productorLaboratory, stock, price, expirationDate);
         this.volumeMl = volumeMl;
-        this.gout = gout;
+        this.taste = taste;
     }
+
     @Override
-    public void displayInfo(){
+    public void displayInfo() {
         super.displayInfo();
-        System.out.println("Volume Ml: " + volumeMl);
+        System.out.println("Volume: " + volumeMl + " ml");
+        System.out.println("Goût: " + taste);
     }
 
-    public int getVolumeMl() {
-        return volumeMl;
-    }
-
-    public void setVolumeMl(int volumeMl) {
-        this.volumeMl = volumeMl;
-    }
-    private String getGout() {
-        return gout;
-    }
-    public void setGout(String gout) {
-        this.gout = gout;
-    }
+    // Getters et Setters
+    public int getVolumeMl() { return volumeMl; }
+    public void setVolumeMl(int volumeMl) { this.volumeMl = volumeMl; }
+    public String getTaste() { return taste; }
+    public void setTaste(String taste) { this.taste = taste; }
 }

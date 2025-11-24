@@ -1,10 +1,12 @@
+package entity;
+
 import java.time.LocalDate;
 
 public  class Injection  extends Medicament{
     private int volumeMl;
     private String administrationRoad;
 
-    private Injection(String commercialName, String code, String productorLaboratory, int stock, double price, int volumeMl, LocalDate expirationDate, String administrationRoad) {
+    public Injection(String commercialName, String code, String productorLaboratory, int stock, double price, int volumeMl, LocalDate expirationDate, String administrationRoad) {
         super(commercialName, code, productorLaboratory, stock, price, expirationDate);
         this.volumeMl = volumeMl;
         this.administrationRoad = administrationRoad;
