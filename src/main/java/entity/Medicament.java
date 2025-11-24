@@ -62,7 +62,6 @@ public abstract class Medicament {
     public void setStock(int stock) {
         this.stock = stock;
     }
-
     public double getPrice() {
         return price;
     }
