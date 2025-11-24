@@ -15,7 +15,6 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        // Boucle principale du programme
         while (true) {
             showMainMenu();
             int choice = getIntInput();
@@ -37,15 +36,15 @@ public class Main {
     // ================= NAVIGATION PRINCIPALE =================
     private static void showMainMenu() {
         System.out.println("\n==========================================");
-        System.out.println("      💊 GESTION DE PHARMACIE v1.0 💊     ");
+        System.out.println("      GESTION DE PHARMACIE     ");
         System.out.println("==========================================");
-        System.out.println("1. [+] Ajouter un médicament");
-        System.out.println("2. [-] Supprimer un médicament");
-        System.out.println("3. [✎] Modifier un médicament");
-        System.out.println("4. [👁] Afficher le stock (Tableau)");
+        System.out.println("1. Ajouter un médicament");
+        System.out.println("2. Supprimer un médicament");
+        System.out.println("3. Modifier un médicament");
+        System.out.println("4. Afficher le stock (Tableau)");
         System.out.println("------------------------------------------");
-        System.out.println("0. [X] Quitter");
-        System.out.print("👉 Votre choix : ");
+        System.out.println("0. Quitter");
+        System.out.print("Votre choix : ");
     }
 
     // ================= 1. MENU CRÉATION =================
@@ -56,7 +55,7 @@ public class Main {
         System.out.println("3. Ajouter Injection");
         System.out.println("4. Ajouter Pommade");
         System.out.println("0. Retour au menu principal");
-        System.out.print("👉 Choix : ");
+        System.out.print("Choix : ");
 
         int type = getIntInput();
         if (type == 0) return; // Retour au menu principal
@@ -152,8 +151,7 @@ public class Main {
         else System.out.println("Type non géré.");
     }
 
-    // --- Sous-menus de modification (inchangés mais avec pause à la fin) ---
-    // Je remets un exemple complet, les autres suivent la même logique
+    // --- Sous-menus de modification ---
 
     private static void updateSirupMenu(Sirup s) {
         boolean editing = true;
@@ -191,13 +189,29 @@ public class Main {
 
             int choice = getIntInput();
             switch (choice) {
-                case 1: p.setCommercialName(getStringInput("Nouveau nom : ")); break;
-                case 2: p.setPrice(getDoubleInput()); break;
-                case 3: p.setStock(getIntInput()); break;
-                case 4: p.setProductorLaboratory(getStringInput("Nouveau Labo : ")); break;
-                case 5: p.setDosageMg(getIntInput()); break;
-                case 6: p.setNbrPills(getIntInput()); break;
-                case 0: editing = false; break;
+                case 1:
+                    p.setCommercialName(getStringInput("Nouveau nom : "));
+                    break;
+                case 2:
+                    System.out.print("Nouveau prix: ");
+                    p.setPrice(getDoubleInput());
+                    break;
+                case 3:
+                    System.out.print("Nouveau Stock: ");
+                    p.setStock(getIntInput());
+                    break;
+                case 4:
+                    p.setProductorLaboratory(getStringInput("Nouveau Labo : "));
+                    break;
+                case 5:
+                    p.setDosageMg(getIntInput());
+                    break;
+                case 6:
+                    p.setNbrPills(getIntInput());
+                    break;
+                case 0:
+                    editing = false;
+                    break;
                 default: System.out.println("Choix invalide.");
             }
         }
@@ -205,18 +219,46 @@ public class Main {
         pause();
     }
 
-    // Ajoutez updateInjectionMenu et updatePomadeMenu ici (similaire aux précédents)
     private static void updateInjectionMenu(Injection i) {
         boolean editing = true;
         while (editing) {
             System.out.println("\n--- ÉDITION INJECTION : " + i.getCommercialName() + " ---");
-            System.out.println("1. Nom   2. Prix   3. Stock  4. Labo");
-            System.out.println("5. Volume   6. Voie");
-            System.out.println("0. TERMINER");
+            System.out.println("1. Nom      2. Prix     3. Stock");
+            System.out.println("4. Labo     5. Volume   6. Voie Admin");
+            System.out.println("0. TERMINER L'ÉDITION");
+            System.out.print("👉 Choix : ");
+
             int choice = getIntInput();
-            if(choice == 0) editing = false;
-            // ... logique switch case comme ci-dessus ...
+
+            switch (choice) {
+                case 1:
+                    i.setCommercialName(getStringInput("Nouveau nom : "));
+                    break;
+                case 2:
+                    System.out.print("Nouveau prix: ");
+                    i.setPrice(getDoubleInput());
+                    break;
+                case 3:
+                    System.out.print("Nouveau Stock: ");
+                    i.setStock(getIntInput());
+                    break;
+                case 4:
+                    i.setProductorLaboratory(getStringInput("Nouveau Labo : "));
+                    break;
+                case 5:
+                    i.setAdministrationRoad(getStringInput("Nouvelle voie d'administration: "));
+                    break;
+                case 6:
+                    System.out.print("Nouveau Vollume: ");
+                    i.setVolumeMl(getIntInput());
+                    break;
+                case 0:
+                    editing = false;
+                    break;
+                default: System.out.println("Choix invalide.");
+            }
         }
+        System.out.println("✅ Modifications enregistrées pour l'Injection.");
         pause();
     }
 
@@ -224,13 +266,40 @@ public class Main {
         boolean editing = true;
         while (editing) {
             System.out.println("\n--- ÉDITION POMMADE : " + p.getCommercialName() + " ---");
-            System.out.println("1. Nom   2. Prix   3. Stock  4. Labo");
-            System.out.println("5. Quantité  6. Zone");
-            System.out.println("0. TERMINER");
+            System.out.println("1. Nom      2. Prix     3. Stock");
+            System.out.println("4. Labo     5. Quantité 6. Zone App");
+            System.out.println("0. TERMINER L'ÉDITION");
+            System.out.print("👉 Choix : ");
+
             int choice = getIntInput();
-            if(choice == 0) editing = false;
-            // ... logique switch case comme ci-dessus ...
+
+            switch (choice) {
+                case 1:
+                    p.setCommercialName(getStringInput("Nouveau nom : "));
+                    break;
+                case 2:
+                    System.out.print("Nouveau prix: ");
+                    p.setPrice(getDoubleInput());
+                    break;
+                case 3:
+                    System.out.print("Nouveau Stock: ");
+                    p.setStock(getIntInput());
+                    break;
+                case 4:
+                    p.setProductorLaboratory(getStringInput("Nouveau Labo : "));
+                    break;
+                case 5:
+                    System.out.print("Nouveau volume: ");
+                    p.setQuantity(getIntInput()); break; // Met à jour la quantité (g)
+                case 6: p.setSpot(getStringInput("Nouvelle zone d'application : ")); break; // Met à jour la zone
+
+                case 0:
+                    editing = false;
+                    break;
+                default: System.out.println("❌ Choix invalide.");
+            }
         }
+        System.out.println("✅ Modifications enregistrées pour la Pommade.");
         pause();
     }
 
@@ -318,7 +387,7 @@ public class Main {
     }
 
     private static double getDoubleInput() {
-        try { System.out.print("Valeur : "); return Double.parseDouble(scanner.nextLine()); }
+        try { System.out.print(""); return Double.parseDouble(scanner.nextLine()); }
         catch (Exception e) { return 0.0; }
     }
 
