@@ -12,6 +12,8 @@ public class Pill extends Medicament {
         this.nbrPills = nbrPills;
     }
 
+    public Pill(){super();}
+
     @Override
     public void displayInfo() {
         super.displayInfo();

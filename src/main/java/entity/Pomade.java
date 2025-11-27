@@ -12,6 +12,8 @@ public class Pomade extends Medicament{
         this.spot = spot;
     }
 
+    public Pomade() {super();}
+
     @Override
     public void displayInfo()
     {

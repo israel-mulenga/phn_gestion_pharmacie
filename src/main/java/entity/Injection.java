@@ -12,6 +12,9 @@ public  class Injection  extends Medicament{
         this.administrationRoad = administrationRoad;
     }
 
+    public Injection(){super();}
+
+
     @Override
     public void displayInfo(){
         super.displayInfo();

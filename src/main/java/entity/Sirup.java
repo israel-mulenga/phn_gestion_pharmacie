@@ -12,6 +12,8 @@ public class Sirup extends Medicament {
         this.taste = taste;
     }
 
+    public Sirup(){super();}
+
     @Override
     public void displayInfo() {
         super.displayInfo();

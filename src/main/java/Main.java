@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class Main {
     // Services
-    private static SirupService sirupService = new SirupService();
-    private static PillService pillService = new PillService();
-    private static InjectionService injectionService = new InjectionService();
-    private static PomadeService pomadeService = new PomadeService();
+    private static final SirupService sirupService = new SirupService();
+    private static final PillService pillService = new PillService();
+    private static final InjectionService injectionService = new InjectionService();
+    private static final PomadeService pomadeService = new PomadeService();
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true) {
@@ -154,6 +154,8 @@ public class Main {
     // --- Sous-menus de modification ---
 
     private static void updateSirupMenu(Sirup s) {
+        // Conserver les valeurs actuelles puis construire un nouvel objet modifiable
+        Sirup updated = new Sirup(s.getCommercialName(), s.getCode(), s.getProductorLaboratory(), s.getStock(), s.getPrice(), s.getExpirationDate(), s.getVolumeMl(), s.getTaste());
         boolean editing = true;
         while (editing) {
             System.out.println("\n--- ÉDITION SIROP : " + s.getCommercialName() + " ---");
@@ -164,21 +166,25 @@ public class Main {
 
             int choice = getIntInput();
             switch (choice) {
-                case 1: s.setCommercialName(getStringInput("Nouveau nom : ")); break;
-                case 2: s.setPrice(getDoubleInput()); break;
-                case 3: s.setStock(getIntInput()); break;
-                case 4: s.setProductorLaboratory(getStringInput("Nouveau Labo : ")); break;
-                case 5: s.setVolumeMl(getIntInput()); break;
-                case 6: s.setTaste(getStringInput("Nouveau Goût : ")); break;
+                case 1: updated.setCommercialName(getStringInput("Nouveau nom : ")); break;
+                case 2: updated.setPrice(getDoubleInput()); break;
+                case 3: updated.setStock(getIntInput()); break;
+                case 4: updated.setProductorLaboratory(getStringInput("Nouveau Labo : ")); break;
+                case 5: updated.setVolumeMl(getIntInput()); break;
+                case 6: updated.setTaste(getStringInput("Nouveau Goût : ")); break;
                 case 0: editing = false; break;
                 default: System.out.println("Choix invalide.");
             }
         }
-        System.out.println("✅ Modifications enregistrées.");
+        // Appliquer la mise à jour via le service (meilleure séparation des responsabilités)
+        boolean res = sirupService.update(s.getCode(), updated);
+        if (res) System.out.println("✅ Modifications enregistrées.");
+        else System.out.println("❌ Échec lors de la mise à jour.");
         pause();
     }
 
     private static void updatePillMenu(Pill p) {
+        Pill updated = new Pill(p.getCommercialName(), p.getCode(), p.getProductorLaboratory(), p.getStock(), p.getPrice(), p.getExpirationDate(), p.getDosageMg(), p.getNbrPills());
         boolean editing = true;
         while (editing) {
             System.out.println("\n--- ÉDITION COMPRIMÉ : " + p.getCommercialName() + " ---");
@@ -190,24 +196,24 @@ public class Main {
             int choice = getIntInput();
             switch (choice) {
                 case 1:
-                    p.setCommercialName(getStringInput("Nouveau nom : "));
+                    updated.setCommercialName(getStringInput("Nouveau nom : "));
                     break;
                 case 2:
                     System.out.print("Nouveau prix: ");
-                    p.setPrice(getDoubleInput());
+                    updated.setPrice(getDoubleInput());
                     break;
                 case 3:
                     System.out.print("Nouveau Stock: ");
-                    p.setStock(getIntInput());
+                    updated.setStock(getIntInput());
                     break;
                 case 4:
-                    p.setProductorLaboratory(getStringInput("Nouveau Labo : "));
+                    updated.setProductorLaboratory(getStringInput("Nouveau Labo : "));
                     break;
                 case 5:
-                    p.setDosageMg(getIntInput());
+                    updated.setDosageMg(getIntInput());
                     break;
                 case 6:
-                    p.setNbrPills(getIntInput());
+                    updated.setNbrPills(getIntInput());
                     break;
                 case 0:
                     editing = false;
@@ -215,11 +221,14 @@ public class Main {
                 default: System.out.println("Choix invalide.");
             }
         }
-        System.out.println("✅ Modifications enregistrées.");
+        boolean res = pillService.update(p.getCode(), updated);
+        if (res) System.out.println("✅ Modifications enregistrées.");
+        else System.out.println("❌ Échec lors de la mise à jour.");
         pause();
     }
 
     private static void updateInjectionMenu(Injection i) {
+        Injection updated = new Injection(i.getCommercialName(), i.getCode(), i.getProductorLaboratory(), i.getStock(), i.getPrice(), i.getVolumeMl(), i.getExpirationDate(), i.getAdministrationRoad());
         boolean editing = true;
         while (editing) {
             System.out.println("\n--- ÉDITION INJECTION : " + i.getCommercialName() + " ---");
@@ -232,25 +241,25 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    i.setCommercialName(getStringInput("Nouveau nom : "));
+                    updated.setCommercialName(getStringInput("Nouveau nom : "));
                     break;
                 case 2:
                     System.out.print("Nouveau prix: ");
-                    i.setPrice(getDoubleInput());
+                    updated.setPrice(getDoubleInput());
                     break;
                 case 3:
                     System.out.print("Nouveau Stock: ");
-                    i.setStock(getIntInput());
+                    updated.setStock(getIntInput());
                     break;
                 case 4:
-                    i.setProductorLaboratory(getStringInput("Nouveau Labo : "));
+                    updated.setProductorLaboratory(getStringInput("Nouveau Labo : "));
                     break;
                 case 5:
-                    i.setAdministrationRoad(getStringInput("Nouvelle voie d'administration: "));
+                    updated.setAdministrationRoad(getStringInput("Nouvelle voie d'administration: "));
                     break;
                 case 6:
                     System.out.print("Nouveau Vollume: ");
-                    i.setVolumeMl(getIntInput());
+                    updated.setVolumeMl(getIntInput());
                     break;
                 case 0:
                     editing = false;
@@ -258,11 +267,14 @@ public class Main {
                 default: System.out.println("Choix invalide.");
             }
         }
-        System.out.println("✅ Modifications enregistrées pour l'Injection.");
+        boolean res = injectionService.update(i.getCode(), updated);
+        if (res) System.out.println("✅ Modifications enregistrées pour l'Injection.");
+        else System.out.println("❌ Échec lors de la mise à jour.");
         pause();
     }
 
     private static void updatePomadeMenu(Pomade p) {
+        Pomade updated = new Pomade(p.getCommercialName(), p.getCode(), p.getProductorLaboratory(), p.getStock(), p.getPrice(), p.getQuantity(), p.getExpirationDate(), p.getSpot());
         boolean editing = true;
         while (editing) {
             System.out.println("\n--- ÉDITION POMMADE : " + p.getCommercialName() + " ---");
@@ -275,23 +287,23 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    p.setCommercialName(getStringInput("Nouveau nom : "));
+                    updated.setCommercialName(getStringInput("Nouveau nom : "));
                     break;
                 case 2:
                     System.out.print("Nouveau prix: ");
-                    p.setPrice(getDoubleInput());
+                    updated.setPrice(getDoubleInput());
                     break;
                 case 3:
                     System.out.print("Nouveau Stock: ");
-                    p.setStock(getIntInput());
+                    updated.setStock(getIntInput());
                     break;
                 case 4:
-                    p.setProductorLaboratory(getStringInput("Nouveau Labo : "));
+                    updated.setProductorLaboratory(getStringInput("Nouveau Labo : "));
                     break;
                 case 5:
                     System.out.print("Nouveau volume: ");
-                    p.setQuantity(getIntInput()); break; // Met à jour la quantité (g)
-                case 6: p.setSpot(getStringInput("Nouvelle zone d'application : ")); break; // Met à jour la zone
+                    updated.setQuantity(getIntInput()); break; // Met à jour la quantité (g)
+                case 6: updated.setSpot(getStringInput("Nouvelle zone d'application : ")); break; // Met à jour la zone
 
                 case 0:
                     editing = false;
@@ -299,7 +311,9 @@ public class Main {
                 default: System.out.println("❌ Choix invalide.");
             }
         }
-        System.out.println("✅ Modifications enregistrées pour la Pommade.");
+        boolean res = pomadeService.update(p.getCode(), updated);
+        if (res) System.out.println("✅ Modifications enregistrées pour la Pommade.");
+        else System.out.println("❌ Échec lors de la mise à jour.");
         pause();
     }
 
@@ -317,7 +331,7 @@ public class Main {
         int choice = getIntInput();
         if (choice == 0) return;
 
-        List<? extends Medicament> list = null;
+        List<? extends Medicament> list;
 
         switch (choice) {
             case 1: list = InMemoryDatabase.medicaments; break;

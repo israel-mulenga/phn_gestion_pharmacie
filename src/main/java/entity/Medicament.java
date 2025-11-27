@@ -1,7 +1,23 @@
 package entity;
 
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+ // on inclu le type dans le json
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+
+// on liste les sous-classes
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Sirup.class, name="sirop"),
+        @JsonSubTypes.Type(value = Pill.class, name = "pill"),
+        @JsonSubTypes.Type(value = Injection.class, name = "injection"),
+        @JsonSubTypes.Type(value = Pomade.class, name = "pommade")
+})
 public abstract class Medicament {
     private String commercialName;
     private String code;
@@ -19,6 +35,8 @@ public abstract class Medicament {
         this.expirationDate = expirationDate;
     }
 
+    public Medicament(){}
+
     public void displayInfo(){
         System.out.println("Nom commercial: " + this.commercialName);
         System.out.println("Code: " + this.code);
@@ -28,10 +46,6 @@ public abstract class Medicament {
         System.out.println("Date d'expiration: " + this.expirationDate);
     }
 
-    public void updateStock(int quantity){
-        this.stock += quantity;
-        System.out.println("Stock mis à jour: " + this.stock);
-    }
 
     public String getCommercialName() {
         return commercialName;
