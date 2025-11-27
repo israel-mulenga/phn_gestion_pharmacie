@@ -14,6 +14,7 @@ public class SirupService implements IMedicamentService<Sirup> {
             return false;
         }
         InMemoryDatabase.medicaments.add(item);
+        InMemoryDatabase.saveState();
         return true;
     }
 
@@ -51,6 +52,7 @@ public class SirupService implements IMedicamentService<Sirup> {
             // Mise à jour des attributs spécifiques
             current.setVolumeMl(newItem.getVolumeMl());
             current.setTaste(newItem.getTaste());
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;
@@ -61,6 +63,7 @@ public class SirupService implements IMedicamentService<Sirup> {
         Sirup s = readOne(code);
         if (s != null) {
             InMemoryDatabase.medicaments.remove(s);
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;

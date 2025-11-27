@@ -14,6 +14,7 @@ public class PillService implements IMedicamentService<Pill> {
             return false;
         }
         InMemoryDatabase.medicaments.add(item);
+        InMemoryDatabase.saveState();
         return true;
     }
 
@@ -44,6 +45,7 @@ public class PillService implements IMedicamentService<Pill> {
             // Spécifique Pill
             current.setDosageMg(newItem.getDosageMg());
             current.setNbrPills(newItem.getNbrPills());
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;
@@ -54,6 +56,7 @@ public class PillService implements IMedicamentService<Pill> {
         Pill p = readOne(code);
         if (p != null) {
             InMemoryDatabase.medicaments.remove(p);
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;

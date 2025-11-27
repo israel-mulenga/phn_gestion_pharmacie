@@ -14,6 +14,7 @@ public class InjectionService implements IMedicamentService<Injection> {
             return false;
         }
         InMemoryDatabase.medicaments.add(item);
+        InMemoryDatabase.saveState();
         return true;
     }
 
@@ -42,6 +43,7 @@ public class InjectionService implements IMedicamentService<Injection> {
             // Mise à jour des attributs spécifiques
             current.setVolumeMl(newItem.getVolumeMl());
             current.setAdministrationRoad(newItem.getAdministrationRoad());
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;
@@ -52,6 +54,7 @@ public class InjectionService implements IMedicamentService<Injection> {
         Injection injection = readOne(code);
         if (injection != null) {
             InMemoryDatabase.medicaments.remove(injection);
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;

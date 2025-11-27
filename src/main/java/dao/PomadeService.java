@@ -14,6 +14,7 @@ public class PomadeService implements IMedicamentService<Pomade> {
             return false;
         }
         InMemoryDatabase.medicaments.add(item);
+        InMemoryDatabase.saveState();
         return true;
     }
 
@@ -43,6 +44,7 @@ public class PomadeService implements IMedicamentService<Pomade> {
             current.setExpirationDate(newItem.getExpirationDate());
             current.setQuantity(newItem.getQuantity());
             current.setSpot(newItem.getSpot());
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;
@@ -53,6 +55,7 @@ public class PomadeService implements IMedicamentService<Pomade> {
         Pomade p = readOne(code);
         if (p != null) {
             InMemoryDatabase.medicaments.remove(p);
+            InMemoryDatabase.saveState();
             return true;
         }
         return false;

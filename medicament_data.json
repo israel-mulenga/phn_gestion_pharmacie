@@ -1,0 +1,32 @@
+[
+  {
+    "volumeMl": 59,
+    "taste": "skf",
+    "commercialName": "qwertyui",
+    "code": "asd",
+    "productorLaboratory": "sad",
+    "stock": 45,
+    "price": 3.0,
+    "expirationDate": {
+      "year": 2029,
+      "month": 11,
+      "day": 30
+    },
+    "type": "SIRUP"
+  },
+  {
+    "dosageMg": 43,
+    "nbrPills": 10,
+    "commercialName": "ASDDSF",
+    "code": "SAFD",
+    "productorLaboratory": "ASDSDF",
+    "stock": 345,
+    "price": 234.0,
+    "expirationDate": {
+      "year": 3000,
+      "month": 8,
+      "day": 23
+    },
+    "type": "PILL"
+  }
+]
