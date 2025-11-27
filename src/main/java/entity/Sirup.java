@@ -10,6 +10,7 @@ public class Sirup extends Medicament {
         super(commercialName, code, productorLaboratory, stock, price, expirationDate);
         this.volumeMl = volumeMl;
         this.taste = taste;
+        this.type = "SIRUP";
     }
 
     public Sirup(){super();}

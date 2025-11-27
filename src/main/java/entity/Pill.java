@@ -10,6 +10,7 @@ public class Pill extends Medicament {
         super(commercialName, code, productorLaboratory, stock, price, expirationDate);
         this.dosageMg = dosageMg;
         this.nbrPills = nbrPills;
+        this.type = "PILL";
     }
 
     public Pill(){super();}

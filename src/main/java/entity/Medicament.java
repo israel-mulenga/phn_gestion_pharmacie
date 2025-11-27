@@ -1,23 +1,7 @@
 package entity;
 
 import java.time.LocalDate;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
- // on inclu le type dans le json
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-)
-
-// on liste les sous-classes
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Sirup.class, name="sirop"),
-        @JsonSubTypes.Type(value = Pill.class, name = "pill"),
-        @JsonSubTypes.Type(value = Injection.class, name = "injection"),
-        @JsonSubTypes.Type(value = Pomade.class, name = "pommade")
-})
 public abstract class Medicament {
     private String commercialName;
     private String code;
@@ -25,6 +9,7 @@ public abstract class Medicament {
     private int stock;
     private double price;
     private LocalDate expirationDate;
+    protected String type; // champ pour indentifier la classe fille
 
     public Medicament(String commercialName, String code, String productorLaboratory, int stock, double price, LocalDate expirationDate) {
         this.commercialName = commercialName;
@@ -95,4 +80,9 @@ public abstract class Medicament {
     }
 
     public abstract String getSpecificData();
+
+    public  String getType(){
+        return this.type;
+    }
+
 }

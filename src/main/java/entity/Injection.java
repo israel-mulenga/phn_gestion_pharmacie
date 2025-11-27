@@ -10,6 +10,7 @@ public  class Injection  extends Medicament{
         super(commercialName, code, productorLaboratory, stock, price, expirationDate);
         this.volumeMl = volumeMl;
         this.administrationRoad = administrationRoad;
+        this.type = "INJECTION";
     }
 
     public Injection(){super();}

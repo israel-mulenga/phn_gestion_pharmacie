@@ -10,6 +10,7 @@ public class Pomade extends Medicament{
         super(commercialName, code, productorLaboratory, stock, price, expirationDate);
         this.quantity = quantity;
         this.spot = spot;
+        this.type = "POMADE";
     }
 
     public Pomade() {super();}
